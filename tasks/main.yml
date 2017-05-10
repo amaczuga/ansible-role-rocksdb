@@ -1,0 +1,49 @@
+---
+- name: "set os-specific variables"
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+
+- name: "install required os devel packages"
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ rocksdb_os_devel_packages }}"
+  become: yes
+  environment: "{{ rocksdb_proxy_env }}"
+
+- name: "prepare build directory"
+  file:
+    path: "{{ rocksdb_build_dir }}"
+    state: directory
+
+- name: "download rocksdb source package"
+  unarchive:
+    src: "{{ rocksdb_sw_release_archive }}"
+    dest: "{{ rocksdb_build_dir }}"
+    creates: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}/Makefile"
+    remote_src: yes
+    validate_certs: no
+  environment: "{{ rocksdb_proxy_env }}"
+
+- name: "compile rocksdb software"
+  make:
+    chdir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}"
+    target: "{{ item }}"
+    params:
+      DEBUG_LEVEL: 0
+  with_items: "{{ rocksdb_make_targets }}"
+
+- name: "install rocksdb software"
+  make:
+    chdir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}"
+    target: install-static
+    params:
+      INSTALL_PATH: "{{ rocksdb_install_dir }}"
+  become: yes
+
+- name: "install rocksdb tools"
+  command: cp {{ item }} {{ rocksdb_install_dir }}/bin
+  args:
+    chdir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}"
+    creates: "{{ rocksdb_install_dir }}/bin/{{ item }}"
+  with_items: "{{ rocksdb_sw_tools }}"
+  become: yes
