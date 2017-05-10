@@ -10,6 +10,7 @@ galaxy_info:
     - 25
   - name: Ubuntu
     versions:
+    - trusty
     - xenial
   galaxy_tags:
   - database
