@@ -1,0 +1,30 @@
+---
+rocksdb_build_dir: "/tmp/build"
+
+# software install destination directory
+rocksdb_install_dir: "/usr/local"
+
+rocksdb_sw_name: "rocksdb"
+
+# software version
+rocksdb_sw_release: "5.2.1"
+
+# software source archive location
+rocksdb_sw_release_archive: "https://github.com/facebook/rocksdb/archive/v{{ rocksdb_sw_release }}.tar.gz"
+
+rocksdb_os_devel_packages: []
+
+rocksdb_make_targets:
+  - "static_lib"
+  - "tools"
+  - "db_bench"
+
+rocksdb_sw_tools:
+  - "sst_dump"
+  - "db_sanity_test"
+  - "db_stress"
+  - "write_stress"
+  - "ldb"
+  - "db_repl_stress"
+  - "rocksdb_dump"
+  - "rocksdb_undump"
