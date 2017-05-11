@@ -5,4 +5,3 @@ rocksdb_os_devel_packages:
   - "libsnappy-dev"
   - "zlib1g-dev"
   - "libbz2-dev"
-  - "libzstd-dev"
