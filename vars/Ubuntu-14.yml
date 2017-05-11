@@ -1,0 +1,7 @@
+---
+rocksdb_os_devel_packages:
+  - "gcc"
+  - "libgflags-dev"
+  - "libsnappy-dev"
+  - "zlib1g-dev"
+  - "libbz2-dev"
