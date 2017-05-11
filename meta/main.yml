@@ -3,7 +3,7 @@ galaxy_info:
   description: Install RocksDB software
   company: 
   license: Apache
-  min_ansible_version: 2.1.5
+  min_ansible_version: 2.2.2
   platforms:
   - name: Fedora
     versions:
