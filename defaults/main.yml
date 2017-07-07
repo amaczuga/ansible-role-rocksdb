@@ -20,6 +20,7 @@ rocksdb_make_targets:
   - "db_bench"
 
 rocksdb_sw_tools:
+  - "db_bench"
   - "sst_dump"
   - "db_sanity_test"
   - "db_stress"

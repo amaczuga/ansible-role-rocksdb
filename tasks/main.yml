@@ -41,9 +41,16 @@
   become: yes
 
 - name: "install rocksdb tools"
-  command: cp {{ item }} {{ rocksdb_install_dir }}/bin
+  command: cp {{ item }} {{ rocksdb_install_dir }}/
   args:
     chdir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}"
     creates: "{{ rocksdb_install_dir }}/bin/{{ item }}"
   with_items: "{{ rocksdb_sw_tools }}"
+  become: yes
+
+- name: "copy rocksdb tools directory"
+  command: cp -r tools {{ rocksdb_install_dir }}/
+  args:
+    chdir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_release }}"
+    creates: "{{ rocksdb_install_dir }}/bin/tools"
   become: yes
