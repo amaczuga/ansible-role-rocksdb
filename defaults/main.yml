@@ -1,5 +1,5 @@
 ---
-rocksdb_build_dir: "/tmp/build"
+rocksdb_build_dir: "/var/tmp/build"
 
 # software install destination directory
 rocksdb_install_dir: "/usr/local"
