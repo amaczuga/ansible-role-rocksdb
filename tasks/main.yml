@@ -39,19 +39,19 @@
 - name: "install rocksdb software"
   make:
     chdir: "{{ rocksdb_src_dir }}"
-    target: install-static
+    target: install
     params:
       INSTALL_PATH: "{{ rocksdb_install_dir }}"
   become: yes
 
 - name: "search for rocksdb tools"
-  command: "find {{ rocksdb_src_dir }} {{ rocksdb_src_dir }}/tools -maxdepth 1 -type f -executable"
+  command: "find {{ rocksdb_src_dir }} {{ rocksdb_src_dir }}/tools -maxdepth 1 -type f -executable ! -iname 'librocksdb*'"
   register: "rocksdb_sw_tools"
   changed_when: "false"
 
 - name: "install rocksdb tools"
-  command: "install -C -m 644 -t {{ rocksdb_install_dir }}/bin/ {{ item }}"
-  args:
-    creates: "{{ rocksdb_install_dir }}/bin/{{ item|basename }}"
+  command: "install -C -v -m 755 {{ item }} {{ rocksdb_install_dir }}/bin/{{ item|basename }}"
   with_items: "{{ rocksdb_sw_tools.stdout_lines }}"
+  register: "installed"
+  changed_when: installed.stdout != ""
   become: yes

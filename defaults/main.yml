@@ -15,6 +15,7 @@ rocksdb_sw_release_archive: "https://github.com/facebook/rocksdb/archive/v{{ roc
 rocksdb_os_devel_packages: []
 
 rocksdb_make_targets:
+  - "shared_lib"
   - "static_lib"
   - "tools"
   - "db_bench"
