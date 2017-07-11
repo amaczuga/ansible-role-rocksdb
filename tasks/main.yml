@@ -29,7 +29,7 @@
 - name: "download rocksdb source package"
   unarchive:
     src: "{{ rocksdb_sw_version_archive }}"
-    dest: "{{ rocksdb_build_dir }}"
+    dest: "{{ rocksdb_src_dir }}"
     creates: "{{ rocksdb_src_dir }}/Makefile"
     extra_opts:
       - "--strip-components=1"
