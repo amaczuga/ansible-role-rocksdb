@@ -10,20 +10,29 @@
   become: yes
   environment: "{{ rocksdb_proxy_env }}"
 
+- name: "clean up build directory"
+  file:
+    path: "{{ rocksdb_build_dir }}"
+    state: absent
+  when: rocksdb_build_dir_clean
+
 - name: "prepare build and install directory"
   file:
     path: "{{ item }}"
     state: directory
   with_items:
     - "{{ rocksdb_build_dir }}"
+    - "{{ rocksdb_src_dir }}"
     - "{{ rocksdb_install_dir }}"
-    - "{{ rocksdb_install_dir }}/bin"
+    - "{{ rocksdb_install_dir }}/{{ rocksdb_binary_subdir }}"
 
 - name: "download rocksdb source package"
   unarchive:
-    src: "{{ rocksdb_sw_release_archive }}"
+    src: "{{ rocksdb_sw_version_archive }}"
     dest: "{{ rocksdb_build_dir }}"
     creates: "{{ rocksdb_src_dir }}/Makefile"
+    extra_opts:
+      - "--strip-components=1"
     remote_src: yes
     validate_certs: no
   environment: "{{ rocksdb_proxy_env }}"
@@ -50,7 +59,7 @@
   changed_when: "false"
 
 - name: "install rocksdb tools"
-  command: "install -C -v -m 755 {{ item }} {{ rocksdb_install_dir }}/bin/{{ item|basename }}"
+  command: "install -C -v -m 755 {{ item }} {{ rocksdb_install_dir }}/{{ rocksdb_binary_subdir }}/{{ item|basename }}"
   with_items: "{{ rocksdb_sw_tools.stdout_lines }}"
   register: "installed"
   changed_when: installed.stdout != ""

@@ -17,11 +17,11 @@ rocksdb_install_dir: "/usr/local"
 
 rocksdb_sw_name: "rocksdb"
 
-# software version
-rocksdb_sw_release: "5.2.1"
+# software version (tag, branch, commit_id)
+rocksdb_sw_version: "5.2.1"
 
 # software source archive location
-rocksdb_sw_release_archive: "https://github.com/facebook/rocksdb/archive/v{{ rocksdb_sw_release }}.tar.gz"
+rocksdb_sw_version_archive: "https://github.com/facebook/rocksdb/archive/{{ rocksdb_sw_version }}.tar.gz"
 ```
 
 Dependencies
