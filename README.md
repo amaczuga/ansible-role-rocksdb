@@ -1,5 +1,5 @@
-Role Name
-=========
+RocksDB
+=======
 
 Install RocksDB software (http://rocksdb.org/)
 
