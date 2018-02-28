@@ -43,6 +43,7 @@
     target: "{{ item }}"
     params:
       DEBUG_LEVEL: 0
+      MAKEFLAGS: j
   with_items: "{{ rocksdb_make_targets }}"
 
 - name: "install rocksdb software"
