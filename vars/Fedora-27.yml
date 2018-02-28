@@ -1,0 +1,14 @@
+---
+rocksdb_os_devel_packages:
+  - "gcc"
+  - "gcc-c++"
+  - "gflags"
+  - "gflags-devel"
+  - "snappy"
+  - "snappy-devel"
+  - "zlib"
+  - "zlib-devel"
+  - "bzip2"
+  - "bzip2-devel"
+  - "libzstd"
+  - "libzstd-devel"
