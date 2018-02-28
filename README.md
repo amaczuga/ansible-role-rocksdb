@@ -1,4 +1,4 @@
-RocksDB
+RocksDB [![Build Status](https://travis-ci.org/amaczuga/ansible-role-rocksdb.svg?branch=master)](https://travis-ci.org/amaczuga/ansible-role-rocksdb)
 =======
 
 Install RocksDB software (http://rocksdb.org/)
