@@ -6,3 +6,5 @@ rocksdb_proxy_env:
   socks_proxy: "{{ lookup('env', 'socks_proxy') }}"
 
 rocksdb_src_dir: "{{ rocksdb_build_dir }}/{{ rocksdb_sw_name }}-{{ rocksdb_sw_version }}"
+
+rocksdb_make_flags: "{{ lookup('env', 'rocksdb_make_flags') | default(rocksdb_make_flags_default) }}"

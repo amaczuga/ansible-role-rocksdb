@@ -24,3 +24,5 @@ rocksdb_make_targets:
   - "static_lib"
   - "tools"
   - "db_bench"
+
+rocksdb_make_flags_default: "j"
